@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.976,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\ProjectSudoku.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.569,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGame.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.404,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\MapCreator.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.857,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.852,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\MapCreator.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
