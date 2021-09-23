@@ -67,12 +67,47 @@ void swapRowsSmall() {
 	memcpy(tmpRow, grid[rowToSwap], sizeof(int) * 9);
 	memcpy(grid[rowToSwap], grid[swappedRow], sizeof(int) * 9);
 	memcpy(grid[swappedRow], tmpRow, sizeof(int) * 9);
-	ShowMessage(IntToStr(areaToSwap));
+	/*ShowMessage(IntToStr(areaToSwap));
 	ShowMessage(IntToStr(rowToSwap));
-	ShowMessage(IntToStr(swappedRow));
+	ShowMessage(IntToStr(swappedRow));*/
+}
+
+void swapColumnsSmall() {
+    srand(time(NULL));
+
+	int areaToSwap = rand() % 3 + 1;
+	int columnToSwap = (rand() % 3 + 1) + ((areaToSwap - 1) * 3);
+	int swappedColumn;
+	do {
+		swappedColumn = (rand() % 3 + 1) + ((areaToSwap - 1) * 3);
+	} while (swappedColumn == columnToSwap);
+
+	areaToSwap--;
+	columnToSwap--;
+	swappedColumn--;
+
+	int tmpColumn[9];
+
+	for (int i = 0; i < 9; i++) {
+		tmpColumn[i] = grid[i][columnToSwap];
+	}
+	//memcpy(tmpRow, grid[rowToSwap], sizeof(int) * 9);
+
+	for (int i = 0; i < 9; i++) {
+		grid[i][columnToSwap] = grid[i][swappedColumn];
+	}
+	//memcpy(grid[rowToSwap], grid[swappedRow], sizeof(int) * 9);
+
+    for (int i = 0; i < 9; i++) {
+		grid[i][swappedColumn] = tmpColumn[i];
+	}
+	//memcpy(grid[swappedRow], tmpRow, sizeof(int) * 9);
+	ShowMessage(IntToStr(areaToSwap));
+	ShowMessage(IntToStr(columnToSwap));
+	ShowMessage(IntToStr(swappedColumn));
 }
 
 void getGrid(int (&resultGrid)[9][9]) {
-	swapRowsSmall();
+	swapColumnsSmall();
 	memcpy(resultGrid, grid, sizeof(int) * 9 * 9);
 }
