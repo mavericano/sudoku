@@ -48,6 +48,31 @@ void transpond(){
 	memcpy(grid, temporaryGrid, sizeof(int) * 9 * 9);
 }
 
+void swapRowsSmall() {
+	srand(time(NULL));
+
+	int areaToSwap = rand() % 3 + 1;
+	int rowToSwap = (rand() % 3 + 1) + ((areaToSwap - 1) * 3);
+	int swappedRow;
+	do {
+		swappedRow = (rand() % 3 + 1) + ((areaToSwap - 1) * 3);
+	} while (swappedRow == rowToSwap);
+
+	areaToSwap--;
+	rowToSwap--;
+	swappedRow--;
+
+	int tmpRow[9];
+
+	memcpy(tmpRow, grid[rowToSwap], sizeof(int) * 9);
+	memcpy(grid[rowToSwap], grid[swappedRow], sizeof(int) * 9);
+	memcpy(grid[swappedRow], tmpRow, sizeof(int) * 9);
+	ShowMessage(IntToStr(areaToSwap));
+	ShowMessage(IntToStr(rowToSwap));
+	ShowMessage(IntToStr(swappedRow));
+}
+
 void getGrid(int (&resultGrid)[9][9]) {
+	swapRowsSmall();
 	memcpy(resultGrid, grid, sizeof(int) * 9 * 9);
 }
