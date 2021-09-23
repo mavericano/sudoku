@@ -89,3 +89,12 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
+void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol, int ARow,
+          const UnicodeString Value)
+{
+	const auto r = std::regex(R"([1-9]{1})");
+	AnsiString tmp = Value;
+	StringGrid1->Cells[ACol][ARow] := regex_match(tmp.c_str(), r) ? Value : "";
+}
+//---------------------------------------------------------------------------
+

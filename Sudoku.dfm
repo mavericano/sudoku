@@ -27,5 +27,6 @@ object Form1: TForm1
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goFixedRowDefAlign]
     TabOrder = 0
     OnDrawCell = StringGrid1DrawCell
+    OnSetEditText = StringGrid1SetEditText
   end
 end
