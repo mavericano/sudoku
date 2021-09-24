@@ -1,0 +1,11 @@
+//---------------------------------------------------------------------------
+
+#ifndef MapCreatorH
+#define MapCreatorH
+#include <time.h>
+#include <stdlib.h>
+#include <vector>
+//---------------------------------------------------------------------------
+int init();
+void getGrid(int (&resultGrid)[9][9]);
+#endif

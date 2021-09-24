@@ -15,7 +15,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::fillGrid(){
-	int tmp[9][9];
+	std::vector<std::vector<int>> tmp(9, std::vector<int>(9));
 
 	getGrid(tmp);
 
@@ -28,6 +28,7 @@ void __fastcall TForm1::fillGrid(){
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
+    init();
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
 	fillGrid();

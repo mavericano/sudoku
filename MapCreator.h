@@ -4,7 +4,8 @@
 #define MapCreatorH
 #include <time.h>
 #include <stdlib.h>
+#include <vector>
 //---------------------------------------------------------------------------
-int returnHello();
-void getGrid(int (&resultGrid)[9][9]);
+int init();
+void getGrid(std::vector<std::vector<int>> &resultGrid);
 #endif
