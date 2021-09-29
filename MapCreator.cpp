@@ -12,6 +12,7 @@ std::vector<std::vector<int>> grid(9, std::vector<int>(9));
 
 int init() {
 	//[[((i*n + i/n + j) % (n*n) + 1) for j in range(n*n)] for i in range(n*n)]
+	srand(time(NULL));
 	grid  = {
 	{1, 2, 3, 4, 5, 6, 7, 8, 9},
 	{4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -53,8 +54,6 @@ void transpond(){
 }
 
 void swapRowsSmall() {
-	srand(time(NULL));
-
 	int areaToSwap = rand() % 3 + 1;
 	int rowToSwap = (rand() % 3 + 1) + ((areaToSwap - 1) * 3);
 	int swappedRow;
@@ -80,8 +79,6 @@ void swapRowsSmall() {
 }
 
 void swapColumnsSmall() {
-    srand(time(NULL));
-
 	int areaToSwap = rand() % 3 + 1;
 	int columnToSwap = (rand() % 3 + 1) + ((areaToSwap - 1) * 3);
 	int swappedColumn;
@@ -117,21 +114,82 @@ void swapColumnsSmall() {
 void swapRowsArea() {
 	int areaToSwap = rand() % 3 + 1;
 	int swappedArea;
-    do {
+	do {
 		swappedArea = (rand() % 3 + 1);
 	} while (swappedArea == areaToSwap);
 
-	int ** tmp = new int*[3];
+	std::vector<std::vector<int>> tmp(3, std::vector<int>(9));
 
-	//tmp[0] = grid[areaToSwap*3 - 3];
-	//tmp[1] = grid[areaToSwap*3 - 2];
-	//tmp[2] = grid[areaToSwap*3 - 1];
+	tmp[0] = grid[areaToSwap*3 - 3];
+	tmp[1] = grid[areaToSwap*3 - 2];
+	tmp[2] = grid[areaToSwap*3 - 1];
 
 	grid[areaToSwap*3 - 3] = grid[swappedArea*3 - 3];
+	grid[areaToSwap*3 - 2] = grid[swappedArea*3 - 2];
+	grid[areaToSwap*3 - 1] = grid[swappedArea*3 - 1];
+
+	grid[swappedArea*3 - 3] = tmp[0];
+	grid[swappedArea*3 - 2] = tmp[1];
+	grid[swappedArea*3 - 1] = tmp[2];
 	//memcpy(grid[areaToSwap], grid[swappedArea],
 }
 
+void swapColumnsArea() {
+    int areaToSwap = rand() % 3 + 1;
+	int swappedArea;
+	do {
+		swappedArea = (rand() % 3 + 1);
+	} while (swappedArea == areaToSwap);
+
+	std::vector<std::vector<int>> tmp(3, std::vector<int>(9));
+
+	for (int i = 0; i < 9; i++) {
+		tmp[0][i] = grid[i][areaToSwap*3 - 3];
+		tmp[1][i] = grid[i][areaToSwap*3 - 2];
+		tmp[2][i] = grid[i][areaToSwap*3 - 1];
+	}
+
+	for (int i = 0; i < 9; i++) {
+		grid[i][areaToSwap*3 - 3] = grid[i][swappedArea*3 - 3];
+		grid[i][areaToSwap*3 - 2] = grid[i][swappedArea*3 - 2];
+		grid[i][areaToSwap*3 - 1] = grid[i][swappedArea*3 - 1];
+	}
+
+    for (int i = 0; i < 9; i++) {
+		grid[i][swappedArea*3 - 3] = tmp[0][i];
+		grid[i][swappedArea*3 - 2] = tmp[1][i];
+		grid[i][swappedArea*3 - 1] = tmp[2][i];
+	}
+}
+
+void shuffle() {
+	int amountOfShuffles = rand() % 10 + 10;
+	int currentShuffle;
+
+	for (int i = 0; i < amountOfShuffles; i++) {
+		currentShuffle = rand() % 5;
+
+		switch (currentShuffle) {
+			case 0:
+				transpond();
+				break;
+			case 1:
+				swapRowsSmall();
+				break;
+			case 2:
+				swapColumnsSmall();
+				break;
+			case 3:
+				swapRowsArea();
+				break;
+			case 4:
+				swapColumnsArea();
+				break;
+		}
+	}
+}
+
 void getGrid(std::vector<std::vector<int>> &resultGrid) {
-	//swapColumnsSmall();
+	shuffle();
 	resultGrid = grid;
 }
