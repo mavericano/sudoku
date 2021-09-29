@@ -31,6 +31,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
     init();
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
+	StringGrid1->GridLineWidth = 0;
 	fillGrid();
 	//ShowMessage(IntToStr(returnHello()));
 }
@@ -83,9 +84,11 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 	//но мне нравится больше DrawText - описание есть в справке, в нем расположенние текста можно устанавливать и многое другое.
 	//TRect - делает смещение.
 	TRect r = Rect;
-	r.left +=2;
-	r.top+=2;
-	DrawText(a->Handle,this->StringGrid1->Cells[ACol][ARow].t_str(),-1,(TRect*)&r,DT_CENTER);
+	r.left += 2;
+	r.top += 2;
+	a->Pen->Color = clBlack;
+	a->Rectangle(Rect.left,Rect.top,Rect.right,Rect.bottom);
+	DrawText(a->Handle, this->StringGrid1->Cells[ACol][ARow].t_str(), -1, (TRect*)&r, DT_CENTER);
 
 }
 //---------------------------------------------------------------------------

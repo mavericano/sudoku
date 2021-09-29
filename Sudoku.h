@@ -8,6 +8,7 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.Grids.hpp>
+#include <Vcl.WinXCtrls.hpp>
 #include <regex>
 #include "MapCreator.h"
 //---------------------------------------------------------------------------
@@ -15,6 +16,7 @@ class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
 	TStringGrid *StringGrid1;
+	TToggleSwitch *ToggleSwitch1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
 		  TGridDrawState State);
