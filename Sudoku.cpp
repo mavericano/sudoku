@@ -29,6 +29,13 @@ void __fastcall TForm1::fillGrid(){
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
     init();
+    Cell *tmp;
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            tmp = new Cell();
+            gridCells.
+        }
+    }
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
 	StringGrid1->GridLineWidth = 0;
@@ -51,14 +58,17 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 	//за это состо€ние отвечает переменна€ State
 
 	//теперь ставим цвет дл€ фиксированной €чейки
-	if (State.Contains(gdFixed)) a->Brush->Color = clMoneyGreen;
+	if (State.Contains(gdFixed))
+       a->Brush->Color = clMoneyGreen;
 
 	//“ак как у нас простое условие, т.е. либо больше нул€, либо меньше тогда будет так
 	//” мен€ .ToInt() стоит, ты можешь твой тип поставить например ToDouble.
 	try
 	{
-		if ((!State.Contains(gdFixed))&&(this->StringGrid1->Cells[ACol][ARow].ToInt()>0)) a->Brush->Color = clRed;
-		if ((!State.Contains(gdFixed))&&(this->StringGrid1->Cells[ACol][ARow].ToInt()<0)) a->Brush->Color = clGreen;
+		if ((!State.Contains(gdFixed))&&(this->StringGrid1->Cells[ACol][ARow].ToInt()>0))
+            a->Brush->Color = clRed;
+		if ((!State.Contains(gdFixed))&&(this->StringGrid1->Cells[ACol][ARow].ToInt()<0))
+            a->Brush->Color = clGreen;
 	}catch(...)
 	{
 		//try Ќужен дл€ того что бы если вдруг в твоей €цейки текст окажетс€, тогда он ее красить не будет
@@ -96,9 +106,21 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol, int ARow,
           const UnicodeString Value)
 {
-	const auto r = std::regex(R"([1-9]{1})");
-	AnsiString tmp = Value;
-	StringGrid1->Cells[ACol][ARow] = std::regex_match(tmp.c_str(), r) ? Value : "";
+    if (Value != "") {
+        const auto r = std::regex(R"([1-9]{1})");
+        AnsiString tmp = Value;
+        StringGrid1->Cells[ACol][ARow] = std::regex_match(tmp.c_str(), r) ? Value : "";
+        //ShowMessage(StringGrid1->Cells[ACol][ARow]);
+        validateGrid(ACol, ARow);
+    }
+}
+
+void __fastcall TForm1::validateGrid(int ACol, int ARow) {
+     //ShowMessage(StringGrid1->Cells[ACol][ARow]);
+     int value = StrToInt(StringGrid1->Cells[ACol][ARow]);
+     for (int i = 0; i < 9 && !gridCells[ARow][ACol].isDupe; i++) {
+
+     }
 }
 //---------------------------------------------------------------------------
 

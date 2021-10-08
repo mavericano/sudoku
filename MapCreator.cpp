@@ -6,9 +6,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 std::vector<std::vector<int>> BASE_GRID(9, std::vector<int>(9));
-
-//int ** grid = new int*[9];
 std::vector<std::vector<int>> grid(9, std::vector<int>(9));
+std::vector<std::vector<int>> correctGrid(9, std::vector<int>(9));
 
 int init() {
 	//[[((i*n + i/n + j) % (n*n) + 1) for j in range(n*n)] for i in range(n*n)]
@@ -189,7 +188,28 @@ void shuffle() {
 	}
 }
 
+void createTask(int difficulty) {
+	int currentDifficulty = 81;
+	int iterator = 0;
+	std::vector<std::vector<bool>> flook (9, std::vector<bool>(9));
+
+	while (iterator < 81) {
+		int i = rand() % 9;
+		int j = rand() % 9;
+
+		if (!flook[i][j]) {
+			iterator++;
+			flook[i][j] = true;
+
+			int tmp = grid[i][j];
+			grid[i][j] = 0;
+			currentDifficulty--;
+        }
+    }
+}
+
 void getGrid(std::vector<std::vector<int>> &resultGrid) {
 	shuffle();
+	correctGrid = grid;
 	resultGrid = grid;
 }
