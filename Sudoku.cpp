@@ -30,17 +30,19 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 {
     init();
     Cell *tmp;
+    std::vector<Cell> tmpV;
     for (int i = 0; i < 9; i++) {
+        tmpV = std::vector<Cell>();
+        gridCells.push_back(tmpV);
         for (int j = 0; j < 9; j++) {
             tmp = new Cell();
-            gridCells.
+            gridCells[i].push_back(*tmp);
         }
     }
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
 	StringGrid1->GridLineWidth = 0;
 	fillGrid();
-	//ShowMessage(IntToStr(returnHello()));
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,

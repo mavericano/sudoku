@@ -7,7 +7,8 @@
 #pragma package(smart_init)
 
 Cell::Cell() {
-    this.isDupe = false;
-    this.isHighlited = false;
-    this.value = 0;
+    this->isDupe = false;
+    this->isHighlited = false;
+    this->isRedactable = false;
+    this->value = 0;
 }
