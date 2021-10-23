@@ -193,7 +193,7 @@ void createTask(int difficulty) {
 	int iterator = 0;
 	std::vector<std::vector<bool>> flook (9, std::vector<bool>(9));
 
-	while (iterator < 81) {
+	while (iterator < std::pow(difficulty, 4)) {
 		int i = rand() % 9;
 		int j = rand() % 9;
 
@@ -204,6 +204,11 @@ void createTask(int difficulty) {
 			int tmp = grid[i][j];
 			grid[i][j] = 0;
 			currentDifficulty--;
+
+            if (TestUniqueness() != Unique) {
+                grid[i][j] = tmp;
+                currentDifficulty++;
+            }
         }
     }
 }
@@ -314,6 +319,7 @@ Ret TestUniqueness()
 
 void getGrid(std::vector<std::vector<int>> &resultGrid) {
 	shuffle();
+    createTask(3);
 	correctGrid = grid;
 	resultGrid = grid;
 }

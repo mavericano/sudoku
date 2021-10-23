@@ -24,26 +24,28 @@ void __fastcall TForm1::fillGrid(){
 			StringGrid1->Cells[j][i] = tmp[i][j];
 		}
 	}
-}
 
-void __fastcall TForm1::FormCreate(TObject *Sender)
-{
-    init();
-    Cell *tmp;
+    Cell *tmpCell;
     std::vector<Cell> tmpV;
     for (int i = 0; i < 9; i++) {
         tmpV = std::vector<Cell>();
         gridCells.push_back(tmpV);
         for (int j = 0; j < 9; j++) {
-            tmp = new Cell();
-            gridCells[i].push_back(*tmp);
+            tmpCell = new Cell();
+            gridCells[i].push_back(*tmpCell);
         }
     }
+}
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+    init();
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
 	StringGrid1->GridLineWidth = 0;
 	fillGrid();
 }
+
 //---------------------------------------------------------------------------
 void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
           TGridDrawState State)
@@ -113,7 +115,7 @@ void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol, int AR
         AnsiString tmp = Value;
         StringGrid1->Cells[ACol][ARow] = std::regex_match(tmp.c_str(), r) ? Value : "";
         //ShowMessage(StringGrid1->Cells[ACol][ARow]);
-        validateGrid(ACol, ARow);
+        //validateGrid(ACol, ARow);
     }
 }
 

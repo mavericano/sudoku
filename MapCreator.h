@@ -9,4 +9,5 @@
 int init();
 void getGrid(std::vector<std::vector<int>> &resultGrid);
 enum Ret {Unique, NotUnique, NoSolution};
+Ret TestUniqueness();
 #endif
