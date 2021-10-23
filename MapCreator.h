@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <vector>
 //---------------------------------------------------------------------------
-int init();
+void init();
 void getGrid(std::vector<std::vector<int>> &resultGrid);
 enum Ret {Unique, NotUnique, NoSolution};
 Ret TestUniqueness();
