@@ -17,7 +17,11 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 void __fastcall TForm1::fillGrid(){
 	std::vector<std::vector<int>> tmp(9, std::vector<int>(9));
 
-	getGrid(tmp);
+    Sudoku *sudoku = new Sudoku();
+    sudoku->createSeed();
+    sudoku->genPuzzle();
+    sudoku->calculateDifficulty();
+	tmp = sudoku->getGrid();
 
 	for (int i = 0; i < 9; i++){
 		for (int j = 0; j < 9; j++){
@@ -39,7 +43,7 @@ void __fastcall TForm1::fillGrid(){
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
-    init();
+    //init();
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
 	StringGrid1->GridLineWidth = 0;

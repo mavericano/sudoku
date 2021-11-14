@@ -13,6 +13,7 @@
 #include <vector>
 #include "MapCreator.h"
 #include "Cell.h"
+#include "SudokuGenerator.h"
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {

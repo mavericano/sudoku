@@ -1,0 +1,59 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "SudokuSolver.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+    SudokuSolver::SudokuSolver(vector<vector<int>> toSolve) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int current = i * 9 + j;
+                grid[current] = toSolve[i][j];
+            }
+        }
+    }
+
+    bool SudokuSolver::solve() {
+        try {
+            placeNumber(0);
+            return false;
+        } catch (char* ex) {
+            return true;
+        }
+    }
+
+    void SudokuSolver::placeNumber(int pos) {
+        if (pos == 81) {
+            throw (char*) "Finished!";
+        }
+        if (grid[pos] > 0) {
+            placeNumber(pos + 1);
+            return;
+        }
+        for (int n = 1; n <= 9; n++) {
+            if (checkValidity(n, pos % 9, pos / 9)) {
+                grid[pos] = n;
+                placeNumber(pos + 1);
+                grid[pos] = 0;
+            }
+        }
+    }
+
+    bool SudokuSolver::checkValidity(int val, int x, int y) {
+        for (int i = 0; i < 9; i++) {
+            if (grid[y * 9 + i] == val || grid[i * 9 + x] == val)
+                return false;
+        }
+        int startX = (x / 3) * 3;
+        int startY = (y / 3) * 3;
+        for (int i = startY; i < startY + 3; i++) {
+            for (int j = startX; j < startX + 3; j++) {
+                if (grid[i * 9 + j] == val)
+                    return false;
+            }
+        }
+        return true;
+    }
+};

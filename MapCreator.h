@@ -5,6 +5,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <vector>
+#include <string>
+#include "SudokuSolver.h"
 //---------------------------------------------------------------------------
 void init();
 void getGrid(std::vector<std::vector<int>> &resultGrid);

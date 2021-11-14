@@ -236,6 +236,7 @@ void shuffle() {
 void createTask(int difficulty) {
 	int currentDifficulty = std::pow(difficulty, 4);
 	int iterator = 0;
+    std::string logger = "lol";
 	std::vector<std::vector<bool>> flook (9, std::vector<bool>(9));
 
 	while (iterator < std::pow(difficulty, 4)) {
@@ -251,118 +252,122 @@ void createTask(int difficulty) {
 			currentDifficulty--;
 
             //switch (
-            if (TestUniqueness() != Unique) {
-                grid[i][j] = tmp;
-                currentDifficulty++;
+            SudokuSolver *solver = new SudokuSolver(grid);
+            if (solver->solve()) {
+               logger += "|";
+               grid[i][j] = tmp;
+               currentDifficulty++;
             }
         }
     }
+    //AnsiString t = new AnsiString(log.c_str());
+    ShowMessage(logger.c_str());
     ShowMessage(IntToStr(currentDifficulty));
 }
 
-Ret TestUniqueness()
-{
-    // Find untouched location with most information
-    int xp = 0;
-    int yp = 0;
-    std::vector<byte> Mp;
-    int cMp = 10;
-
-    for(int y = 0; y < 9; y++)
-    {
-        for(int x = 0; x < 9; x++)
-        {
-            // Is this spot unused?
-            if(grid[y][x] == 0)
-            {
-                // Set M of possible solutions
-                std::vector<byte> M = {0,1,2,3,4,5,6,7,8,9};
-
-                // Remove used numbers in the vertical direction
-                for(int a = 0; a < 9; a++)
-                    M[grid[a][x]] = 0;
-
-                // Remove used numbers in the horizontal direction
-                for(int b = 0; b < 9; b++)
-                    M[grid[y][b]] = 0;
-
-                // Remove used numbers in the sub square.
-                //MASSIVE TODO
-                int	squareIndex = areaGrid[y][x];
-                for(int c = 0; c < 9; c++)
-                {
-                    std::pair p = subGrid[squareIndex][c];
-                    M[grid[p.first][p.second]] = 0;
-                }
-
-                int cM = 0;
-                // Calculate cardinality of M
-                for(int d = 1; d < 10; d++)
-                    cM += M[d] == 0 ? 0 : 1;
-
-                // Is there more information in this spot than in the best yet?
-                if(cM < cMp)
-                {
-                    cMp = cM;
-                    Mp = M;
-                    xp = x;
-                    yp = y;
-                }
-            }
-        }
-    }
-
-    // Finished?
-    if(cMp == 10)
-        return Unique;
-
-    // Couldn't find a solution?
-    if(cMp == 0)
-        return NoSolution;
-
-    // Try elements
-    int success = 0;
-    for(int i = 1; i < 10; i++)
-    {
-        if(Mp[i] != 0)
-        {
-            grid[yp][xp] = Mp[i];
-
-            switch(TestUniqueness())
-            {
-                case Unique:
-                    success++;
-                    break;
-
-                case NotUnique:
-                    return NotUnique;
-
-                case NoSolution:
-                    break;
-            }
-
-            // More than one solution found?
-            if(success > 1)
-                return NotUnique;
-        }
-    }
-
-    // Restore to original state.
-    grid[yp][xp] = 0;
-
-    switch(success)
-    {
-        case 0:
-            return NoSolution;
-
-        case 1:
-            return Unique;
-
-        default:
-            // Won't happen.
-            return NotUnique;
-    }
-}
+//Ret TestUniqueness()
+//{
+//    // Find untouched location with most information
+//    int xp = 0;
+//    int yp = 0;
+//    std::vector<byte> Mp;
+//    int cMp = 10;
+//
+//    for(int y = 0; y < 9; y++)
+//    {
+//        for(int x = 0; x < 9; x++)
+//        {
+//            // Is this spot unused?
+//            if(grid[y][x] == 0)
+//            {
+//                // Set M of possible solutions
+//                std::vector<byte> M = {0,1,2,3,4,5,6,7,8,9};
+//
+//                // Remove used numbers in the vertical direction
+//                for(int a = 0; a < 9; a++)
+//                    M[grid[a][x]] = 0;
+//
+//                // Remove used numbers in the horizontal direction
+//                for(int b = 0; b < 9; b++)
+//                    M[grid[y][b]] = 0;
+//
+//                // Remove used numbers in the sub square.
+//                //MASSIVE TODO
+//                int	squareIndex = areaGrid[y][x];
+//                for(int c = 0; c < 9; c++)
+//                {
+//                    std::pair p = subGrid[squareIndex][c];
+//                    M[grid[p.first][p.second]] = 0;
+//                }
+//
+//                int cM = 0;
+//                // Calculate cardinality of M
+//                for(int d = 1; d < 10; d++)
+//                    cM += M[d] == 0 ? 0 : 1;
+//
+//                // Is there more information in this spot than in the best yet?
+//                if(cM < cMp)
+//                {
+//                    cMp = cM;
+//                    Mp = M;
+//                    xp = x;
+//                    yp = y;
+//                }
+//            }
+//        }
+//    }
+//
+//    // Finished?
+//    if(cMp == 10)
+//        return Unique;
+//
+//    // Couldn't find a solution?
+//    if(cMp == 0)
+//        return NoSolution;
+//
+//    // Try elements
+//    int success = 0;
+//    for(int i = 1; i < 10; i++)
+//    {
+//        if(Mp[i] != 0)
+//        {
+//            grid[yp][xp] = Mp[i];
+//
+//            switch(TestUniqueness())
+//            {
+//                case Unique:
+//                    success++;
+//                    break;
+//
+//                case NotUnique:
+//                    return NotUnique;
+//
+//                case NoSolution:
+//                    break;
+//            }
+//
+//            // More than one solution found?
+//            if(success > 1)
+//                return NotUnique;
+//        }
+//    }
+//
+//    // Restore to original state.
+//    grid[yp][xp] = 0;
+//
+//    switch(success)
+//    {
+//        case 0:
+//            return NoSolution;
+//
+//        case 1:
+//            return Unique;
+//
+//        default:
+//            // Won't happen.
+//            return NotUnique;
+//    }
+//}
 
 void getGrid(std::vector<std::vector<int>> &resultGrid) {
 	//shuffle();
