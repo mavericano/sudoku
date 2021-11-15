@@ -12,3 +12,10 @@ Cell::Cell() {
     this->isRedactable = false;
     this->value = 0;
 }
+
+Cell::Cell(int value) {
+    this->isDupe = false;
+    this->isHighlited = false;
+    this->isRedactable = false;
+    this->value = value;
+}

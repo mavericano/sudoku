@@ -10,5 +10,6 @@ class Cell {
         bool isRedactable;
         int value;
         Cell();
+        Cell(int value);
 };
 #endif

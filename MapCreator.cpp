@@ -252,17 +252,17 @@ void createTask(int difficulty) {
 			currentDifficulty--;
 
             //switch (
-            SudokuSolver *solver = new SudokuSolver(grid);
-            if (solver->solve()) {
-               logger += "|";
-               grid[i][j] = tmp;
-               currentDifficulty++;
-            }
+            //SudokuSolver *solver = new SudokuSolver(grid);
+//            if (solver->solve()) {
+//               logger += "|";
+//               grid[i][j] = tmp;
+//               currentDifficulty++;
+//            }
         }
     }
     //AnsiString t = new AnsiString(log.c_str());
-    ShowMessage(logger.c_str());
-    ShowMessage(IntToStr(currentDifficulty));
+    //ShowMessage(logger.c_str());
+    //ShowMessage(IntToStr(currentDifficulty));
 }
 
 //Ret TestUniqueness()

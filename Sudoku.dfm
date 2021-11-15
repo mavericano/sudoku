@@ -16,10 +16,10 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object StringGrid1: TStringGrid
-    Left = 16
+    Left = 8
     Top = 56
-    Width = 713
-    Height = 473
+    Width = 455
+    Height = 455
     Color = clWhite
     ColCount = 9
     DefaultColWidth = 50
@@ -32,10 +32,11 @@ object Form1: TForm1
     Font.Height = -16
     Font.Name = 'Gadugi'
     Font.Style = []
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goFixedRowDefAlign]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goFixedRowDefAlign]
     ParentFont = False
     TabOrder = 0
     OnDrawCell = StringGrid1DrawCell
+    OnSelectCell = StringGrid1SelectCell
     OnSetEditText = StringGrid1SetEditText
   end
   object ToggleSwitch1: TToggleSwitch

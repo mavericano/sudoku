@@ -3,7 +3,8 @@
 #ifndef SudokuGeneratorH
 #define SudokuGeneratorH
 //---------------------------------------------------------------------------
-#endif#pragma package(smart_init)
+#endif
+#pragma package(smart_init)
 #include <iostream>
 #include <algorithm>
 #include <ctime>

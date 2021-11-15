@@ -24,10 +24,12 @@ __published:	// IDE-managed Components
 	void __fastcall StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
 		  TGridDrawState State);
 	void __fastcall StringGrid1SetEditText(TObject *Sender, int ACol, int ARow, const UnicodeString Value);
+    void __fastcall StringGrid1SelectCell(TObject *Sender, int ACol, int ARow, bool &CanSelect);
+
 
 private:	// User declarations
     void __fastcall fillGrid();
-    void __fastcall validateGrid(int ACol, int ARow);
+    void __fastcall validateGrid();
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
     std::vector<std::vector<Cell>> gridCells;
