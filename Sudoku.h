@@ -1,5 +1,4 @@
 //---------------------------------------------------------------------------
-
 #ifndef SudokuH
 #define SudokuH
 //---------------------------------------------------------------------------
@@ -25,7 +24,6 @@ __published:	// IDE-managed Components
 		  TGridDrawState State);
 	void __fastcall StringGrid1SetEditText(TObject *Sender, int ACol, int ARow, const UnicodeString Value);
     void __fastcall StringGrid1SelectCell(TObject *Sender, int ACol, int ARow, bool &CanSelect);
-
 
 private:	// User declarations
     void __fastcall fillGrid();

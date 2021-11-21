@@ -40,4 +40,5 @@ public:
   void printSVG(string);
   void calculateDifficulty();
   int  branchDifficultyScore();
+  int getDifficultyLevel();
 };

@@ -1,8 +1,6 @@
 //---------------------------------------------------------------------------
-
 #include <vcl.h>
 #pragma hdrstop
-
 #include "Sudoku.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -16,20 +14,22 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::fillGrid(){
 	std::vector<std::vector<int>> tmp(9, std::vector<int>(9));
-
     srand(time(NULL));
     Sudoku *sudoku = new Sudoku();
-    sudoku->createSeed();
-    sudoku->genPuzzle();
-    sudoku->calculateDifficulty();
+    int t = 0;
+    //do {
+        sudoku->createSeed();
+        sudoku->genPuzzle();
+        sudoku->calculateDifficulty();
+        t++;
+    //} while (t < 400);
+    ShowMessage(IntToStr(sudoku->getDifficultyLevel()));
 	tmp = sudoku->getGrid();
-
 	for (int i = 0; i < 9; i++){
 		for (int j = 0; j < 9; j++){
 			StringGrid1->Cells[j][i] = tmp[i][j] == 0 ? 0 : tmp[i][j];
 		}
 	}
-
     Cell *tmpCell;
     std::vector<Cell> tmpV;
     for (int i = 0; i < 9; i++) {
@@ -37,14 +37,13 @@ void __fastcall TForm1::fillGrid(){
         gridCells.push_back(tmpV);
         for (int j = 0; j < 9; j++) {
             tmpCell = new Cell(tmp[i][j]);
-            if (tmpCell->value != 0) {
+            if (tmpCell->value == 0) {
                 tmpCell->isRedactable = true;
             }
             gridCells[i].push_back(*tmpCell);
         }
     }
 }
-
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
     //init();
@@ -53,7 +52,6 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 	StringGrid1->GridLineWidth = 0;
 	fillGrid();
 }
-
 //---------------------------------------------------------------------------
 void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
           TGridDrawState State)
@@ -68,15 +66,13 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 	//2. Выделенная - когда выделяешь gdSelected
 	//3. и "Сфокусированная" - это на которой у тебя стоит курсор gdFocused
 	//за это состояние отвечает переменная State
-
 	//теперь ставим цвет для фиксированной ячейки
 	if (State.Contains(gdFixed))
        a->Brush->Color = clMoneyGreen;
-
 	//Так как у нас простое условие, т.е. либо больше нуля, либо меньше тогда будет так
 	//У меня .ToInt() стоит, ты можешь твой тип поставить например ToDouble.
 	try {
-		if (gridCells[ARow][ACol].isRedactable)
+		if (!gridCells[ARow][ACol].isRedactable)
         //(this->StringGrid1->Cells[ACol][ARow].ToInt()>0))
             a->Brush->Color = (TColor) RGB(205, 197, 194);
         else
@@ -84,12 +80,11 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
             a->Brush->Color = clWhite;
         if (gridCells[ARow][ACol].isDupe) {
            a->Brush->Color = clRed;
-           ShowMessage(IntToStr(ACol) + " " + IntToStr(ARow) + " isDupe(");
+           //ShowMessage(IntToStr(ACol) + " " + IntToStr(ARow) + " isDupe(");
         }
 	} catch(...) {
 		//try Нужен для того что бы если вдруг в твоей яцейки текст окажется, тогда он ее красить не будет
 	}
-
     //тут дополнил еще что бы выделение работало
 	//будет ячейку рамной обводить
     if (State.Contains(gdSelected)) {
@@ -97,7 +92,6 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
        //a->Pen->Color = clBlue;
        //a->Rectangle(Rect);
 	}
-
 	//Все, мы установили устовия расскраски, теперь закрациваем
 	a->FillRect(Rect);
 	//Далее, так как DefaultDrawing = False; необходимо еще и текст напечатать.
@@ -117,22 +111,21 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol, int ARow,
           const UnicodeString Value)
 {
-    if (!
-    gridCells[ARow][ACol].isRedactable) {
-       ShowMessage("nope");
-       StringGrid1->Cells[ACol][ARow] = IntToStr(gridCells[ARow][ACol].value);
-       return;
-    }
+//    if (!gridCells[ARow][ACol].isRedactable) {
+//       //ShowMessage("nope");
+//       StringGrid1->Cells[ACol][ARow] = IntToStr(gridCells[ARow][ACol].value);
+//       return;
+//    }
     if (Value != "") {
         const auto r = std::regex(R"([1-9]{1})");
         AnsiString tmp = Value;
         StringGrid1->Cells[ACol][ARow] = std::regex_match(tmp.c_str(), r) ? Value : "";
+        gridCells[ARow][ACol].value = std::regex_match(tmp.c_str(), r) ? StrToInt(Value) : 0;
         //ShowMessage(StringGrid1->Cells[ACol][ARow]);
-        validateGrid();
         //StringGrid1->Cells[0][0] = "hi";
     }
+    validateGrid();
 }
-
 void __fastcall TForm1::validateGrid() {
      //ShowMessage(StringGrid1->Cells[ACol][ARow]);
      //int value = StrToInt(StringGrid1->Cells[ACol][ARow]);
@@ -143,19 +136,77 @@ void __fastcall TForm1::validateGrid() {
 //
 //         }
 //     }
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            gridCells[i][j].isDupe = false;
+        }
+    }
 
-     for (int block_num=0; block_num<9; ++block_num) {
-         bool nums[10]={false};
-         for (int cell_num=0; cell_num<9; ++cell_num) {
-             int curr_num = gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].value;
-             if(curr_num!=UNASSIGNED && nums[curr_num]==true) {
-                 gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].isDupe = true;
-                 //grid_status=false;
-                 //return;
-             }
-             nums[curr_num] = true;
-         }
-     }
+    for (int col_num = 0; col_num < 9; col_num++) {
+        bool nums[10]={false};
+        bool toDupe[10]={false};
+
+        for (int cell_num=0; cell_num<9; ++cell_num) {
+            int curr_num = gridCells[cell_num][col_num].value;
+            if(curr_num!=0 && nums[curr_num]==true) {
+                toDupe[curr_num] = true;
+                //gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].isDupe = true;
+                //grid_status=false;
+                //return;
+            }
+            nums[curr_num] = true;
+        }
+        for (int cell_num=0; cell_num<9; ++cell_num) {
+            int curr_num = gridCells[cell_num][col_num].value;
+            if (toDupe[curr_num]) {
+                gridCells[cell_num][col_num].isDupe = true;
+            }
+        }
+    }
+
+    for (int row_num = 0; row_num < 9; row_num++) {
+        bool nums[10]={false};
+        bool toDupe[10]={false};
+
+        for (int cell_num=0; cell_num<9; ++cell_num) {
+            int curr_num = gridCells[row_num][cell_num].value;
+            if(curr_num!=0 && nums[curr_num]==true) {
+                toDupe[curr_num] = true;
+                //gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].isDupe = true;
+                //grid_status=false;
+                //return;
+            }
+            nums[curr_num] = true;
+        }
+        for (int cell_num=0; cell_num<9; ++cell_num) {
+            int curr_num = gridCells[row_num][cell_num].value;
+            if (toDupe[curr_num]) {
+                gridCells[row_num][cell_num].isDupe = true;
+            }
+        }
+    }
+
+    for (int block_num=0; block_num<9; ++block_num) {
+        bool nums[10]={false};
+        bool toDupe[10]={false};
+
+        for (int cell_num=0; cell_num<9; ++cell_num) {
+            int curr_num = gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].value;
+            if(curr_num!=0 && nums[curr_num]==true) {
+                toDupe[curr_num] = true;
+                //gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].isDupe = true;
+                //grid_status=false;
+                //return;
+            }
+            nums[curr_num] = true;
+        }
+        for (int cell_num=0; cell_num<9; ++cell_num) {
+            int curr_num = gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].value;
+            if (toDupe[curr_num]) {
+                gridCells[((int)(block_num/3))*3 + (cell_num/3)][((int)(block_num%3))*3 + (cell_num%3)].isDupe = true;
+            }
+        }
+    }
 //     for (int i = 0; i < 9 && !gridCells[ARow][ACol].isDupe; i++) {
 //
 //     }
@@ -166,6 +217,7 @@ void __fastcall TForm1::StringGrid1SelectCell(TObject *Sender, int ACol, int ARo
           bool &CanSelect)
 {
     //StringGrid1SetEditText(Sender, ACol, ARow, StringGrid1->Cells[ACol][ARow]);
+    CanSelect = gridCells[ARow][ACol].isRedactable;
 }
 //---------------------------------------------------------------------------
 

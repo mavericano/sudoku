@@ -373,3 +373,7 @@ void Sudoku::calculateDifficulty()
 
   this->difficultyLevel = B*100 + emptyCells;
 }
+
+int Sudoku::getDifficultyLevel() {
+    return this->difficultyLevel;
+}
