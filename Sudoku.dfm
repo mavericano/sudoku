@@ -10,6 +10,7 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   Scaled = False
   OnCreate = FormCreate
@@ -29,7 +30,7 @@ object Form1: TForm1
     FixedRows = 0
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
+    Font.Height = -21
     Font.Name = 'Gadugi'
     Font.Style = []
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goFixedRowDefAlign]
@@ -45,5 +46,23 @@ object Form1: TForm1
     Width = 72
     Height = 20
     TabOrder = 1
+  end
+  object MainMenu1: TMainMenu
+    Left = 584
+    Top = 296
+    object N1: TMenuItem
+      Caption = #1060#1072#1081#1083
+      object N2: TMenuItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+        OnClick = N2Click
+      end
+      object N3: TMenuItem
+        Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100
+        OnClick = N3Click
+      end
+    end
+    object N4: TMenuItem
+      Caption = #1055#1088#1072#1074#1080#1083#1072' '
+    end
   end
 end

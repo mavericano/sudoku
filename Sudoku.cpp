@@ -16,20 +16,16 @@ void __fastcall TForm1::fillGrid(){
 	std::vector<std::vector<int>> tmp(9, std::vector<int>(9));
     srand(time(NULL));
     Sudoku *sudoku = new Sudoku();
-    int t = 0;
+    //int t = 0;
     //do {
-        sudoku->createSeed();
-        sudoku->genPuzzle();
-        sudoku->calculateDifficulty();
-        t++;
+    sudoku->createSeed();
+    sudoku->genPuzzle();
+    sudoku->calculateDifficulty();
+    //t++;
     //} while (t < 400);
-    ShowMessage(IntToStr(sudoku->getDifficultyLevel()));
+    //ShowMessage(IntToStr(sudoku->getDifficultyLevel()));
 	tmp = sudoku->getGrid();
-	for (int i = 0; i < 9; i++){
-		for (int j = 0; j < 9; j++){
-			StringGrid1->Cells[j][i] = tmp[i][j] == 0 ? 0 : tmp[i][j];
-		}
-	}
+
     Cell *tmpCell;
     std::vector<Cell> tmpV;
     for (int i = 0; i < 9; i++) {
@@ -51,11 +47,13 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 	StringGrid1->DoubleBuffered = true;
 	StringGrid1->GridLineWidth = 0;
 	fillGrid();
+    fillFromCells();
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
           TGridDrawState State)
 {
+    validateGrid();
 	//Для удобства
 	TCanvas *a = this->StringGrid1->Canvas;
 	//Далле необходимо установить стандартные цвета, те что у тебя будут, если условие не выполняется
@@ -104,6 +102,7 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 	r.top += 2;
 	a->Pen->Color = clBlack;
 	a->Rectangle(Rect.left,Rect.top,Rect.right,Rect.bottom);
+    a->Font->Size = 16;
 	DrawText(a->Handle, this->StringGrid1->Cells[ACol][ARow].t_str(), -1, (TRect*)&r, DT_CENTER);
 }
 //---------------------------------------------------------------------------
@@ -123,8 +122,9 @@ void __fastcall TForm1::StringGrid1SetEditText(TObject *Sender, int ACol, int AR
         gridCells[ARow][ACol].value = std::regex_match(tmp.c_str(), r) ? StrToInt(Value) : 0;
         //ShowMessage(StringGrid1->Cells[ACol][ARow]);
         //StringGrid1->Cells[0][0] = "hi";
+    } else {
+        gridCells[ARow][ACol].value = 0;
     }
-    validateGrid();
 }
 void __fastcall TForm1::validateGrid() {
      //ShowMessage(StringGrid1->Cells[ACol][ARow]);
@@ -221,3 +221,22 @@ void __fastcall TForm1::StringGrid1SelectCell(TObject *Sender, int ACol, int ARo
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::N2Click(TObject *Sender)
+{
+     saveGameToFile(gridCells);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N3Click(TObject *Sender)
+{
+    readSavedGame(gridCells, "");
+    fillFromCells();
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::fillFromCells() {
+     for (int i = 0; i < 9; i++){
+		for (int j = 0; j < 9; j++){
+			StringGrid1->Cells[j][i] = gridCells[i][j].value == 0 ? "" : IntToStr(gridCells[i][j].value);
+		}
+	}
+}
