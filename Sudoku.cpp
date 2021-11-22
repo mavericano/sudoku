@@ -56,6 +56,7 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
     validateGrid();
 	//Для удобства
 	TCanvas *a = this->StringGrid1->Canvas;
+    a->Pen->Width = 1;
 	//Далле необходимо установить стандартные цвета, те что у тебя будут, если условие не выполняется
 	//цвет как у тебя стоял если бы значение ячейки было бы равно нулю.
 	a->Brush->Color = clWhite;
@@ -72,7 +73,7 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 	try {
 		if (!gridCells[ARow][ACol].isRedactable)
         //(this->StringGrid1->Cells[ACol][ARow].ToInt()>0))
-            a->Brush->Color = (TColor) RGB(205, 197, 194);
+            a->Brush->Color = (TColor) RGB(214, 214, 214);
         else
 		//if ((!State.Contains(gdFixed))&&(this->StringGrid1->Cells[ACol][ARow].ToInt()<0))
             a->Brush->Color = clWhite;
@@ -100,10 +101,24 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
 	TRect r = Rect;
 	r.left += 2;
 	r.top += 2;
-	a->Pen->Color = clBlack;
+	a->Pen->Color = (TColor) RGB(105, 105, 105);  //HEX for this color is #696969
+                                                  //NICE
 	a->Rectangle(Rect.left,Rect.top,Rect.right,Rect.bottom);
     a->Font->Size = 16;
+    //a->Font->Color = gridCells[ARow][ACol].isRedactable ? clBlue : clBlack;
 	DrawText(a->Handle, this->StringGrid1->Cells[ACol][ARow].t_str(), -1, (TRect*)&r, DT_CENTER);
+
+    a->Pen->Width = 4;
+    a->Pen->Color = clBlack;
+    a->MoveTo(150, 0);
+    a->LineTo(150, 455);
+    a->MoveTo(300, 0);
+    a->LineTo(300, 455);
+
+    a->MoveTo(0, 150);
+    a->LineTo(455, 150);
+    a->MoveTo(0, 300);
+    a->LineTo(455, 300);
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
