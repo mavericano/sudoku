@@ -65,4 +65,12 @@ object Form1: TForm1
       Caption = #1055#1088#1072#1074#1080#1083#1072' '
     end
   end
+  object SaveDialog1: TSaveDialog
+    Left = 584
+    Top = 120
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 592
+    Top = 208
+  end
 end

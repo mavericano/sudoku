@@ -223,14 +223,22 @@ void __fastcall TForm1::StringGrid1SelectCell(TObject *Sender, int ACol, int ARo
 
 void __fastcall TForm1::N2Click(TObject *Sender)
 {
-     saveGameToFile(gridCells);
+     if (SaveDialog1->Execute()) {
+         AnsiString ans = SaveDialog1->FileName;
+         saveGameToFile(gridCells, ans.c_str());
+     }
+
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::N3Click(TObject *Sender)
 {
-    readSavedGame(gridCells, "");
-    fillFromCells();
+    if (OpenDialog1->Execute()) {
+        AnsiString ans = OpenDialog1->FileName;
+        readSavedGame(gridCells, ans.c_str());
+        fillFromCells();
+    }
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::fillFromCells() {

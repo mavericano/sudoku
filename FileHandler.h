@@ -9,5 +9,5 @@
 #include <vector>
 #include "Cell.h"
 
-void saveGameToFile(std::vector<std::vector<Cell>> gridCells);
+void saveGameToFile(std::vector<std::vector<Cell>> gridCells, std::string path);
 void readSavedGame(std::vector<std::vector<Cell>> &gridCells, std::string path);

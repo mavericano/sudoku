@@ -9,6 +9,7 @@
 #include <Vcl.Grids.hpp>
 #include <Vcl.WinXCtrls.hpp>
 #include <Vcl.Menus.hpp>
+#include <Vcl.Dialogs.hpp>
 #include <regex>
 #include <vector>
 #include "MapCreator.h"
@@ -26,6 +27,8 @@ __published:	// IDE-managed Components
     TMenuItem *N2;
     TMenuItem *N3;
     TMenuItem *N4;
+    TSaveDialog *SaveDialog1;
+    TOpenDialog *OpenDialog1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
 		  TGridDrawState State);

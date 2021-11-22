@@ -6,8 +6,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-void saveGameToFile(std::vector<std::vector<Cell>> gridCells) {
-    ofstream fout("savedGame.txt");
+void saveGameToFile(std::vector<std::vector<Cell>> gridCells, std::string path) {
+    ofstream fout(path);
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             fout << gridCells[i][j].value << " " << gridCells[i][j].isRedactable << " ";
@@ -17,7 +17,7 @@ void saveGameToFile(std::vector<std::vector<Cell>> gridCells) {
 }
 
 void readSavedGame(std::vector<std::vector<Cell>> &gridCells, std::string path) {
-    ifstream fin("savedGame.txt");
+    ifstream fin(path);
 
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
