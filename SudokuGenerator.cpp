@@ -5,6 +5,22 @@
 #include "SudokuGenerator.h"
 //---------------------------------------------------------------------------
 
+vector<vector<int>> Sudoku::getSolnGrid() {
+    vector<vector<int>> ans;
+    ans.resize(9);
+    for (int i = 0; i < 9; i++) {
+        ans[i].resize(9);
+    }
+
+    for(int row_num=0; row_num<9; ++row_num) {
+        for(int col_num=0; col_num<9; ++col_num) {
+            ans[row_num][col_num] = solnGrid[row_num][col_num];
+        }
+    }
+
+    return ans;
+}
+
 vector<vector<int>> Sudoku::getGrid()
 {
   vector<vector<int>> ans;

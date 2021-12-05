@@ -11,11 +11,17 @@ Cell::Cell() {
     this->isHighlited = false;
     this->isRedactable = false;
     this->value = 0;
+    this->correctValue = 0;
 }
 
-Cell::Cell(int value) {
+Cell::Cell(int value, int correctValue) {
     this->isDupe = false;
     this->isHighlited = false;
     this->isRedactable = false;
     this->value = value;
+    this->correctValue = correctValue;
+}
+
+bool Cell::isCorrect() {
+     return value == correctValue;
 }

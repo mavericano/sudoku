@@ -9,7 +9,9 @@ class Cell {
         bool isHighlited;
         bool isRedactable;
         int value;
+        int correctValue;
         Cell();
-        Cell(int value);
+        Cell(int value, int correctValue);
+        bool isCorrect();
 };
 #endif

@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.334,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuSolver.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.229,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Cell.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.947,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.335,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGenerator.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\MapCreator.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.569,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGame.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.dfm=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\MapCreator.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.313,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\FileHandler.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.335,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGenerator.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.229,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Cell.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.976,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\ProjectSudoku.cbproj=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.334,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuSolver.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.404,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.976,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\ProjectSudoku.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.352,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuSolver.cpp=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.229,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Cell.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.569,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGame.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.818,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGame.h=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.852,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.229,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Cell.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.335,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGenerator.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\MapCreator.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.065,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.334,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuSolver.cpp</Transaction>
     <Transaction>1899.12.30 00:00:00.000.079,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.196,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Sudoku.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.947,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\MapCreator.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.352,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuSolver.cpp=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.334,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuSolver.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.335,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGenerator.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.857,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>2021.11.21 21:06:57.818,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\SudokuGame.h=</Transaction>
-    <Transaction>2021.11.21 21:37:32.953,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>2021.11.21 21:37:48.313,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\FileHandler.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>2021.11.21 21:37:48.313,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\FileHandler.h=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.953,=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.313,C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\ivan_gavrilovich\Documents\Embarcadero\Studio\Projects\FileHandler.cpp</Transaction>
   </Transactions>
 </BorlandProject>

@@ -34,10 +34,10 @@ public:
   void printGrid();
   bool solveGrid();
   vector<vector<int>> getGrid();
+  vector<vector<int>> getSolnGrid();
   void countSoln(int &number);
   void genPuzzle();
   bool verifyGridStatus();
-  void printSVG(string);
   void calculateDifficulty();
   int  branchDifficultyScore();
   int getDifficultyLevel();

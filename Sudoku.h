@@ -10,6 +10,7 @@
 #include <Vcl.WinXCtrls.hpp>
 #include <Vcl.Menus.hpp>
 #include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtCtrls.hpp>
 #include <regex>
 #include <vector>
 #include "MapCreator.h"
@@ -21,7 +22,6 @@ class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
 	TStringGrid *StringGrid1;
-	TToggleSwitch *ToggleSwitch1;
     TMainMenu *MainMenu1;
     TMenuItem *N1;
     TMenuItem *N2;
@@ -29,6 +29,9 @@ __published:	// IDE-managed Components
     TMenuItem *N4;
     TSaveDialog *SaveDialog1;
     TOpenDialog *OpenDialog1;
+    TButton *Button1;
+    TLabel *Label1;
+    TPanel *Panel1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
 		  TGridDrawState State);
@@ -36,11 +39,15 @@ __published:	// IDE-managed Components
     void __fastcall StringGrid1SelectCell(TObject *Sender, int ACol, int ARow, bool &CanSelect);
     void __fastcall N2Click(TObject *Sender);
     void __fastcall N3Click(TObject *Sender);
+    void __fastcall N4Click(TObject *Sender);
+    void __fastcall Button1Click(TObject *Sender);
 
 private:	// User declarations
     void __fastcall fillGrid();
     void __fastcall validateGrid();
     void __fastcall fillFromCells();
+    void __fastcall highlightGrid(int val);
+    bool isToBeHighlighted;
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
     std::vector<std::vector<Cell>> gridCells;

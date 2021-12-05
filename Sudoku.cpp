@@ -14,6 +14,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::fillGrid(){
 	std::vector<std::vector<int>> tmp(9, std::vector<int>(9));
+    std::vector<std::vector<int>> tmpCorr(9, std::vector<int>(9));
     srand(time(NULL));
     Sudoku *sudoku = new Sudoku();
     //int t = 0;
@@ -25,6 +26,7 @@ void __fastcall TForm1::fillGrid(){
     //} while (t < 400);
     //ShowMessage(IntToStr(sudoku->getDifficultyLevel()));
 	tmp = sudoku->getGrid();
+    tmpCorr = sudoku->getSolnGrid();
 
     Cell *tmpCell;
     std::vector<Cell> tmpV;
@@ -32,7 +34,7 @@ void __fastcall TForm1::fillGrid(){
         tmpV = std::vector<Cell>();
         gridCells.push_back(tmpV);
         for (int j = 0; j < 9; j++) {
-            tmpCell = new Cell(tmp[i][j]);
+            tmpCell = new Cell(tmp[i][j], tmpCorr[i][j]);
             if (tmpCell->value == 0) {
                 tmpCell->isRedactable = true;
             }
@@ -46,6 +48,9 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
 	StringGrid1->GridLineWidth = 0;
+    isToBeHighlighted = false;
+    Panel1->Color = clRed;
+    //(TColor) RGB(46, 46, 46);
 	fillGrid();
     fillFromCells();
 }
@@ -77,9 +82,11 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
         else
 		//if ((!State.Contains(gdFixed))&&(this->StringGrid1->Cells[ACol][ARow].ToInt()<0))
             a->Brush->Color = clWhite;
+        if (gridCells[ARow][ACol].isHighlited) {
+            a->Brush->Color = (TColor) RGB(197, 227, 244);
+        }
         if (gridCells[ARow][ACol].isDupe) {
-           a->Brush->Color = clRed;
-           //ShowMessage(IntToStr(ACol) + " " + IntToStr(ARow) + " isDupe(");
+            a->Brush->Color = (TColor) RGB(255, 156, 156);
         }
 	} catch(...) {
 		//try Нужен для того что бы если вдруг в твоей яцейки текст окажется, тогда он ее красить не будет
@@ -232,7 +239,23 @@ void __fastcall TForm1::StringGrid1SelectCell(TObject *Sender, int ACol, int ARo
           bool &CanSelect)
 {
     //StringGrid1SetEditText(Sender, ACol, ARow, StringGrid1->Cells[ACol][ARow]);
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            gridCells[i][j].isHighlited = false;
+        }
+    }
+    if (isToBeHighlighted && gridCells[ARow][ACol].value != 0) {
+        highlightGrid(gridCells[ARow][ACol].value);
+    }
     CanSelect = gridCells[ARow][ACol].isRedactable;
+}
+
+void __fastcall TForm1::highlightGrid(int val) {
+     for (int i = 0; i < 9; i++) {
+         for (int j = 0; j < 9; j++) {
+             gridCells[i][j].isHighlited = gridCells[i][j].value == val;
+         }
+     }
 }
 //---------------------------------------------------------------------------
 
@@ -263,3 +286,30 @@ void __fastcall TForm1::fillFromCells() {
 		}
 	}
 }
+void __fastcall TForm1::N4Click(TObject *Sender)
+{
+     MessageDlg("Игровое поле представляет собой квадрат размером 9x9, разделённый на меньшие квадраты со стороной в 3 клетки.\nВ них уже в начале игры стоят некоторые числа (от 1 до 9).\nОт игрока требуется заполнить свободные клетки цифрами от 1 до 9 так, чтобы в каждой строке, в каждом столбце и в каждом малом квадрате 3x3 каждая цифра встречалась бы только один раз.", mtInformation, TMsgDlgButtons() << mbOK, 0);
+}
+//---------------------------------------------------------------------------
+
+//void __fastcall TForm1::Button2Click(TObject *Sender)
+//{
+//     isToBeHighlighted = !isToBeHighlighted;
+//     Button2->Caption = isToBeHighlighted ? "Выключить подсветку" : "Включить подсветку";
+//}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button1Click(TObject *Sender) {
+    bool ans = true;
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            ans &= gridCells[i][j].isCorrect();
+        }
+    }
+
+    if (ans) {
+        ShowMessage("Поздравляем! Вы победили!");
+    }
+}
+//---------------------------------------------------------------------------
+
