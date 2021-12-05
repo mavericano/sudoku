@@ -1,6 +1,6 @@
 object Form1: TForm1
   Left = 0
-  Top = 0
+  Top = 41
   Caption = 'Form1'
   ClientHeight = 472
   ClientWidth = 684
@@ -12,6 +12,7 @@ object Form1: TForm1
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  Position = poDesigned
   Scaled = False
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -68,16 +69,52 @@ object Form1: TForm1
     TabOrder = 1
     OnClick = Button1Click
   end
-  object Panel1: TPanel
-    Left = 477
-    Top = 122
-    Width = 206
-    Height = 342
-    Caption = 'Panel1'
-    DoubleBuffered = False
-    ParentBackground = False
-    ParentDoubleBuffered = False
+  object CheckBox1: TCheckBox
+    Left = 485
+    Top = 136
+    Width = 128
+    Height = 25
+    Caption = #1055#1086#1076#1089#1074#1077#1090#1082#1072
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
+    OnClick = CheckBox1Click
+  end
+  object CheckBox2: TCheckBox
+    Left = 485
+    Top = 184
+    Width = 164
+    Height = 97
+    Caption = #1044#1080#1085#1072#1084#1080#1095#1077#1089#1082#1072#1103' '#1087#1088#1086#1074#1077#1088#1082#1072' '#1086#1096#1080#1073#1086#1082
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    WordWrap = True
+    OnClick = CheckBox2Click
+  end
+  object CheckBox3: TCheckBox
+    Left = 485
+    Top = 312
+    Width = 164
+    Height = 73
+    Caption = #1044#1080#1085#1072#1084#1080#1095#1077#1089#1082#1072#1103' '#1089#1074#1077#1088#1082#1072' '#1089' '#1088#1077#1096#1077#1085#1080#1077#1084
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    WordWrap = True
+    OnClick = CheckBox3Click
   end
   object MainMenu1: TMainMenu
     Left = 472
@@ -103,7 +140,7 @@ object Form1: TForm1
     Top = 392
   end
   object OpenDialog1: TOpenDialog
-    Left = 480
-    Top = 344
+    Left = 512
+    Top = 432
   end
 end

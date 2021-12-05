@@ -31,7 +31,9 @@ __published:	// IDE-managed Components
     TOpenDialog *OpenDialog1;
     TButton *Button1;
     TLabel *Label1;
-    TPanel *Panel1;
+    TCheckBox *CheckBox1;
+    TCheckBox *CheckBox2;
+    TCheckBox *CheckBox3;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
 		  TGridDrawState State);
@@ -41,13 +43,14 @@ __published:	// IDE-managed Components
     void __fastcall N3Click(TObject *Sender);
     void __fastcall N4Click(TObject *Sender);
     void __fastcall Button1Click(TObject *Sender);
-
+    void __fastcall CheckBox3Click(TObject *Sender);
+    void __fastcall CheckBox1Click(TObject *Sender);
+    void __fastcall CheckBox2Click(TObject *Sender);
 private:	// User declarations
     void __fastcall fillGrid();
     void __fastcall validateGrid();
     void __fastcall fillFromCells();
     void __fastcall highlightGrid(int val);
-    bool isToBeHighlighted;
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
     std::vector<std::vector<Cell>> gridCells;

@@ -6,6 +6,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
+bool a = false;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
@@ -48,8 +49,6 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 	StringGrid1->DefaultDrawing = false;
 	StringGrid1->DoubleBuffered = true;
 	StringGrid1->GridLineWidth = 0;
-    isToBeHighlighted = false;
-    Panel1->Color = clRed;
     //(TColor) RGB(46, 46, 46);
 	fillGrid();
     fillFromCells();
@@ -58,53 +57,38 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
           TGridDrawState State)
 {
+    if (a) {
+        ShowMessage("Функция включена/выключена");
+        a = false;
+    }
     validateGrid();
-	//Для удобства
+
 	TCanvas *a = this->StringGrid1->Canvas;
     a->Pen->Width = 1;
-	//Далле необходимо установить стандартные цвета, те что у тебя будут, если условие не выполняется
-	//цвет как у тебя стоял если бы значение ячейки было бы равно нулю.
+
 	a->Brush->Color = clWhite;
-	//теперь, у нас ячейки бывают трех видов
-	//1. Фиксированная - это когда стоит свойство fixed gdFixed
-	//2. Выделенная - когда выделяешь gdSelected
-	//3. и "Сфокусированная" - это на которой у тебя стоит курсор gdFocused
-	//за это состояние отвечает переменная State
-	//теперь ставим цвет для фиксированной ячейки
-	if (State.Contains(gdFixed))
-       a->Brush->Color = clMoneyGreen;
-	//Так как у нас простое условие, т.е. либо больше нуля, либо меньше тогда будет так
-	//У меня .ToInt() стоит, ты можешь твой тип поставить например ToDouble.
-	try {
-		if (!gridCells[ARow][ACol].isRedactable)
-        //(this->StringGrid1->Cells[ACol][ARow].ToInt()>0))
-            a->Brush->Color = (TColor) RGB(214, 214, 214);
-        else
-		//if ((!State.Contains(gdFixed))&&(this->StringGrid1->Cells[ACol][ARow].ToInt()<0))
-            a->Brush->Color = clWhite;
-        if (gridCells[ARow][ACol].isHighlited) {
-            a->Brush->Color = (TColor) RGB(197, 227, 244);
-        }
-        if (gridCells[ARow][ACol].isDupe) {
+
+//    начальные
+    if (!gridCells[ARow][ACol].isRedactable)
+        a->Brush->Color = (TColor) RGB(214, 214, 214);
+//    подсветка
+    if (gridCells[ARow][ACol].isHighlited)
+        a->Brush->Color = (TColor) RGB(197, 227, 244);
+//    дубликаты в строках/стобцах/зонах
+    if (CheckBox2->State == cbChecked)
+        if (gridCells[ARow][ACol].isDupe)
             a->Brush->Color = (TColor) RGB(255, 156, 156);
-        }
-	} catch(...) {
-		//try Нужен для того что бы если вдруг в твоей яцейки текст окажется, тогда он ее красить не будет
-	}
-    //тут дополнил еще что бы выделение работало
-	//будет ячейку рамной обводить
-    if (State.Contains(gdSelected)) {
+//    сверка с решением
+    if (CheckBox3->State == cbChecked)
+        if (!gridCells[ARow][ACol].isCorrect() && gridCells[ARow][ACol].value != 0)
+            a->Brush->Color = (TColor) RGB(255, 156, 156);
+//    выделение клетки
+    if (State.Contains(gdSelected))
        a->Brush->Color = (TColor) RGB(154, 206, 235);
-       //a->Pen->Color = clBlue;
-       //a->Rectangle(Rect);
-	}
-	//Все, мы установили устовия расскраски, теперь закрациваем
+
+
 	a->FillRect(Rect);
-	//Далее, так как DefaultDrawing = False; необходимо еще и текст напечатать.
-	//можно стандартным TextRect
-	//a->TextRect(Rect,Rect.left,Rect.top,this->StringGrid1->Cells[ACol][ARow]);
-	//но мне нравится больше DrawText - описание есть в справке, в нем расположенние текста можно устанавливать и многое другое.
-	//TRect - делает смещение.
+
 	TRect r = Rect;
 	r.left += 2;
 	r.top += 2;
@@ -112,7 +96,6 @@ void __fastcall TForm1::StringGrid1DrawCell(TObject *Sender, int ACol, int ARow,
                                                   //NICE
 	a->Rectangle(Rect.left,Rect.top,Rect.right,Rect.bottom);
     a->Font->Size = 16;
-    //a->Font->Color = gridCells[ARow][ACol].isRedactable ? clBlue : clBlack;
 	DrawText(a->Handle, this->StringGrid1->Cells[ACol][ARow].t_str(), -1, (TRect*)&r, DT_CENTER);
 
     a->Pen->Width = 4;
@@ -244,7 +227,7 @@ void __fastcall TForm1::StringGrid1SelectCell(TObject *Sender, int ACol, int ARo
             gridCells[i][j].isHighlited = false;
         }
     }
-    if (isToBeHighlighted && gridCells[ARow][ACol].value != 0) {
+    if (CheckBox1->State == cbChecked && gridCells[ARow][ACol].value != 0) {
         highlightGrid(gridCells[ARow][ACol].value);
     }
     CanSelect = gridCells[ARow][ACol].isRedactable;
@@ -301,15 +284,35 @@ void __fastcall TForm1::N4Click(TObject *Sender)
 
 void __fastcall TForm1::Button1Click(TObject *Sender) {
     bool ans = true;
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
+    for (int i = 0; ans && i < 9; i++) {
+        for (int j = 0; ans && j < 9; j++) {
             ans &= gridCells[i][j].isCorrect();
         }
     }
-
     if (ans) {
         ShowMessage("Поздравляем! Вы победили!");
+    } else {
+        ShowMessage("Что-то не сходится(");
     }
+}
+void __fastcall TForm1::CheckBox3Click(TObject *Sender)
+{
+    StringGrid1->SetFocus();
+    a = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CheckBox1Click(TObject *Sender)
+{
+    StringGrid1->SetFocus();
+    a = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CheckBox2Click(TObject *Sender)
+{
+    StringGrid1->SetFocus();
+    a = true;
 }
 //---------------------------------------------------------------------------
 
